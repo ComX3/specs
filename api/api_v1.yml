@@ -1,0 +1,164 @@
+openapi: 3.0.0
+info:
+  title: api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /user:
+    post:
+      summary: Create User
+      tags:
+        - user
+      responses: {}
+      operationId: post-user
+  '/user/{username}':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+    get:
+      summary: Get user data
+      tags:
+        - user
+      responses: {}
+      operationId: get-user-username
+    put:
+      summary: Update user settings
+      tags:
+        - user
+      responses: {}
+      operationId: put-user-username
+    delete:
+      summary: Delete user
+      tags:
+        - user
+      responses: {}
+      operationId: delete-user-username
+  /org:
+    post:
+      summary: Create org
+      tags:
+        - org
+      responses: {}
+      operationId: post-org
+  '/org/{org_name}':
+    parameters:
+      - schema:
+          type: string
+        name: org_name
+        in: path
+        required: true
+    get:
+      summary: Get org data
+      tags: []
+      responses: {}
+      operationId: get-org-org_name
+    put:
+      summary: Update org data
+      tags: []
+      responses: {}
+      operationId: put-org-org_name
+    delete:
+      summary: Delete org
+      tags: []
+      responses: {}
+      operationId: delete-org-org_name
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: user model
+      x-examples:
+        example_user:
+          id: 30ba8c4b-e81a-4766-8b51-6008618e89a9
+          username: example_user
+          firstname: Bob
+          lastname: Ross
+          email: test@test.com
+          avatar_url: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+          date_joined: '2020-06-20'
+          tier: a
+          active: 'true'
+          orgs:
+            - d58d1d26-868a-4134-9d83-c4695065c77f
+            - 3aca357e-49ec-4841-9ed4-f618bc68273b
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        date_joined:
+          type: string
+        tier:
+          type: string
+        active:
+          type: boolean
+        orgs:
+          type: array
+          items: {}
+        avatar_url:
+          type: string
+      required:
+        - username
+        - firstname
+        - lastname
+        - email
+    Org:
+      title: Org
+      type: object
+      x-examples:
+        example-1:
+          id: d58d1d26-868a-4134-9d83-c4695065c77f
+          org_name: example_org
+          email: testorg@test.com
+          avatar_url: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+          date_joined: '2020-06-30'
+          tier: a
+          active: 'true'
+          admins:
+            - 30ba8c4b-e81a-4766-8b51-6008618e89a9
+            - 31ce7e5d-4c0d-4766-93e3-2e741a226b7b
+          members:
+            - e4cf2583-ff2a-4cf0-add8-18851490838f
+            - e224d844-5b97-451a-8d60-06afb5ebdf04
+            - 30ba8c4b-e81a-4766-8b51-6008618e89a9
+            - 31ce7e5d-4c0d-4766-93e3-2e741a226b7b
+      description: org model
+      properties:
+        id:
+          type: string
+        org_name:
+          type: string
+        email:
+          type: string
+        avatar_url:
+          type: string
+        date_joined:
+          type: string
+        tier:
+          type: string
+        active:
+          type: string
+        admins:
+          type: array
+          items:
+            type: string
+        members:
+          type: array
+          items:
+            type: string
+      required:
+        - org_name
+        - email
+        - admins
+
